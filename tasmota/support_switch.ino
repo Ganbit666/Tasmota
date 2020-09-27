@@ -315,12 +315,12 @@ void SwitchHandler(uint8_t mode)
           }
           break;
         case PUSHBUTTONHOLD_INV:
-          if (NOT_PRESSED == button) {
-            Switch.hold_timer[i] = loops_per_second * Settings.param[P_HOLD_TIME] / 10;  // Start timer on button press...
-          }
-          if ((PRESSED == button) && (Switch.hold_timer[i])) {
-            Switch.hold_timer[i] = 0;    // Button released and hold timer not expired : stop timer.
+          if (PRESSED == button) {
+            Switch.hold_timer[i] = loops_per_second * Settings.param[P_HOLD_TIME] / 10;  // Start timer on button press
             switchflag = POWER_TOGGLE;   // ...and Toggle
+          }
+          if ((NOT_PRESSED == button) && (Switch.hold_timer[i])) {
+            Switch.hold_timer[i] = 0;    // Button released and hold timer not expired : stop timer...
           }
           break;
         case TOGGLEMULTI:
